@@ -103,7 +103,11 @@ void panda::implementation::adjacencyDecomposition(int argc, char **argv,
 
         // Construct lc-classes that this vertex class falls apart in
         std::set<Row<Integer>> lc_classes;
+        int m = 0;
         for (const Map &map: left_coset_reps) {
+            std::cout << "testing map " << m << " / 1024\r" << std::flush;
+            m++;
+
             auto new_vertex = algorithm::apply(map, vertex, TagType{});  // apply map to vertex
             auto lc_rep = algorithm::classRepresentative(new_vertex, lc_symms,
                                                          TagType{});  // find lc representative of new vertex
