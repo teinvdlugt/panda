@@ -20,6 +20,9 @@ namespace panda
       /// Helper function for adjacency decomposition.
       template <template <typename, typename> class JobManagerType, typename Integer, typename TagType>
       void adjacencyDecomposition(int, char**, const std::tuple<Matrix<Integer>, Names, Maps, Matrix<Integer>>&, TagType);
+
+       /*template<typename Integer, typename TagType>
+       void print_class_representatives(const Matrix<Integer> &rows, const Maps &maps, TagType);*/
    }
 }
 

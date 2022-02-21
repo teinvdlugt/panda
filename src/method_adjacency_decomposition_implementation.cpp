@@ -57,10 +57,30 @@ namespace {
                    const Equations<Integer> &);
 }
 
-template<typename Integer>
+/*template<typename Integer>
 void pretty_print_row(Row<Integer> row) {
     for_each(row.begin(), row.end(), [](int number) { std::cout << number << " "; });
-}
+}*/
+
+/*template<typename Integer, typename TagType>
+void panda::implementation::print_class_representatives(const Matrix<Integer> &rows, const Maps &maps, TagType tag) {
+    std::set<Row<Integer>> classes;
+
+    int i = 0;
+    for (const Row<Integer> &row: rows) {
+        i++;
+        std::cout << "finding representative of vertex " << i << " / " << rows.size() << "... "
+                  << classes.size() << " vertex classes until now\r" << std::flush;
+
+        classes.insert(algorithm::classRepresentative(row, maps, tag));
+    }
+
+    std::cout << std::endl << "Found " << classes.size() << " inequivalent vertex classes:\n";
+    for (const Row<Integer> &rep: classes) {
+        pretty_print_row(rep);
+        std::cout << ", class size " << algorithm::getClass(rep, maps, TagType{}).size() << "\n" << std::flush;
+    }
+}*/
 
 template<template<typename, typename> class JobManagerType, typename Integer, typename TagType>
 void panda::implementation::adjacencyDecomposition(int argc, char **argv,
@@ -72,7 +92,14 @@ void panda::implementation::adjacencyDecomposition(int argc, char **argv,
     const auto &names = std::get<1>(data);
     const auto &known_output = std::get<3>(data);
 
+    // To list class representatives of data in known_output (used for result files 6,7).
+    /*const Maps &_maps = std::get<2>(data);
+    print_class_representatives(known_output, _maps, tag);
+    std::cout.flush();
+    assert(2+2==5);*/
 
+    // For job12:
+/*
     std::cout
             << "-------------------------------- unpacking vertex classes (used in job12) ------------------------------------------\n\n";
     // Retrieve maps
@@ -125,7 +152,7 @@ void panda::implementation::adjacencyDecomposition(int argc, char **argv,
     }
     std::cout
             << "-------------------------------- end of unpacking vertex classes ------------------------------------------\n\n";
-    assert(2 + 2 == 5);
+    assert(2 + 2 == 5);*/
 
 
     JobManagerType<Integer, TagType> job_manager(names, node_count, thread_count);
@@ -200,6 +227,7 @@ namespace {
         std::cout << type_string << ":\n";
         // Initialize the process (so that other processes start).
         if (!known_output.empty()) {
+/*
             std::cout << "-------------------------------- my stuff: ------------------------------------------\n\n";
             int i = 0;
             for (const auto &vertex: known_output) {
@@ -213,7 +241,7 @@ namespace {
             }
             std::cout
                     << "-------------------------------- continuing with panda code ------------------------------------------\n\n";
-
+*/
             auto tmp = algorithm::normalize(known_output.front(), equations);
             tmp = algorithm::classRepresentative(tmp, maps, TagType{});
             manager.put(Matrix<Integer>{tmp});
