@@ -54,15 +54,15 @@ void panda::List<Integer, TagType>::put(const Matrix<Integer>& matrix) const
       stream << "Done processing #" << index << '\n';
       std::cerr << stream.str();
 
-      /*std::stringstream stream2;
+      std::stringstream stream2;
       // Row<Integer> current_row = *std::next(rows.begin(), index);  https://stackoverflow.com/questions/20477545/element-at-index-in-a-stdset
       stream2 << "\n<<<<<<<<<<<<<<<\nClass #" << index // << ", which maybe is " << *std::next(rows.begin(), index)
             << " yielded the following " << matrix.size() << " classes:\n";
       for (const auto& row : matrix) {
-          stream2 << row << '\n';
+          stream2 << "**" << row << '\n';
       }
       stream2 << ">>>>>>>>>>>>>>>\n\n";
-      std::cout << stream2.str() << std::flush;*/
+      std::cout << stream2.str() << std::flush;
    }
    #endif
 }
@@ -78,12 +78,14 @@ void panda::List<Integer, TagType>::put(const Row<Integer>& row) const
    {
       if ( std::is_same<TagType, tag::facet>::value )
       {
-         algorithm::prettyPrintln(std::cout, row, names, "<=");
-//         std::cout << "which is " << row << '\n' << std::flush;
+         std::stringstream stream;
+         algorithm::prettyPrintln(stream, row, names, "<=");
+         stream << "** which is " << row << ".\n";
+         std::cout << stream.str() << std::flush;
       }
       else
       {
-         std::cout << row << '\n';// << std::flush;
+         std::cout << row << '\n' << std::flush;
       }
       std::cout.flush();
       iterators.push_back(it);
@@ -121,11 +123,11 @@ Row<Integer> panda::List<Integer, TagType>::get() const
       std::stringstream stream;
       stream << "Processing #" << counter << " of at least " << rows.size();
       stream << " class" << ((rows.size() == 1) ? "" : "es") << '\n';
-      std::cerr << stream.str();
+      std::cerr << stream.str() << std::flush;
 
-      /*std::stringstream stream2;
+      std::stringstream stream2;
       stream2 << "Class #" << counter << " is " << row << '\n';
-      std::cout << stream2.str() << std::flush;*/
+      std::cout << stream2.str() << std::flush;
    }
    #endif
    return row;

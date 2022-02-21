@@ -57,12 +57,12 @@ namespace {
                    const Equations<Integer> &);
 }
 
-/*template<typename Integer>
+template<typename Integer>
 void pretty_print_row(Row<Integer> row) {
     for_each(row.begin(), row.end(), [](int number) { std::cout << number << " "; });
-}*/
+}
 
-/*template<typename Integer, typename TagType>
+template<typename Integer, typename TagType>
 void panda::implementation::print_class_representatives(const Matrix<Integer> &rows, const Maps &maps, TagType tag) {
     std::set<Row<Integer>> classes;
 
@@ -80,7 +80,7 @@ void panda::implementation::print_class_representatives(const Matrix<Integer> &r
         pretty_print_row(rep);
         std::cout << ", class size " << algorithm::getClass(rep, maps, TagType{}).size() << "\n" << std::flush;
     }
-}*/
+}
 
 template<template<typename, typename> class JobManagerType, typename Integer, typename TagType>
 void panda::implementation::adjacencyDecomposition(int argc, char **argv,
