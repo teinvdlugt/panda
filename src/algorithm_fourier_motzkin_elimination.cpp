@@ -344,7 +344,10 @@ namespace
          const auto& vertex = vertices[i];
          auto action = makeDelayedAction([&]()
          {
-            std::cerr << "Fourier-Motzkin Elimination step " << i + 1 << " / " << vertices.size() << ": " << matrix.size() << '\n';
+            std::time_t currentTime = std::time(nullptr);
+            char timeStr[100];
+            strftime(timeStr, sizeof (timeStr), "%d/%m/%y %H:%M:%S", std::localtime(&currentTime));
+            std::cerr << timeStr << "   Fourier-Motzkin Elimination step " << i + 1 << " / " << vertices.size() << ": " << matrix.size() << '\n';
          }, std::chrono::seconds(2));
          projection(matrix, R, vertex, i);
       }

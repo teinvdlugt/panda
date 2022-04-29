@@ -41,7 +41,7 @@ Matrix<Integer> panda::algorithm::rotation(const Matrix<Integer>& matrix,
    // as the first step of the rotation, the furthest Vertex w.r.t. the input facet is calculated.
    // this will be the same vertex for all neighbouring ridges, hence, only needs to be computed once.
    const auto furthest_vertex = furthestVertex(matrix, input);
-   const auto ridges = getRidges(matrix, input);
+   const auto ridges = getRidges(matrix, input);  // This is what takes long and where Fourier-Motzkin elimination happens
    std::set<Row<Integer>> output;
    for ( const auto& ridge : ridges )
    {
